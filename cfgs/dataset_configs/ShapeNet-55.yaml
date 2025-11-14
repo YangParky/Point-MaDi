@@ -1,0 +1,5 @@
+NAME: ShapeNet
+DATA_PATH: ../../Dataset/Shapenet/ShapeNet55-34/ShapeNet-55
+N_POINTS: 8192
+PC_PATH: ../../Dataset/Shapenet/ShapeNet55-34/shapenet_pc
+ratio: 1.0

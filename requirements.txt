@@ -1,0 +1,15 @@
+argparse
+ipdb
+easydict
+h5py
+matplotlib
+numpy
+opencv-python-headless
+pyyaml
+scipy
+tensorboardX
+timm==0.4.5
+tqdm
+transforms3d
+termcolor
+scikit-learn
