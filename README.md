@@ -68,7 +68,7 @@ We use ShapeNet, ScanObjectNN, ModelNet40, ShapeNetPart, S3DIS, ScanNetV2 in thi
 The checkpoints and logs have been released on [Google Drive](https://drive.google.com/drive/folders/1PIysBbdIB4sNyv4GP5_04uEmEqEcyZEF?usp=sharing). You can use the voting strategy in classification testing to reproduce the performance reported in the paper.
 For classification downstream tasks, we randomly select 8 seeds to obtain the best checkpoint. 
 
-## 4. Point-MaDi Pre-training
+## 4. Pre-training
 Pre-training with the default configuration, run the script:
 ```
 sh scripts/pretrain.sh <GPU> <exp_name>
@@ -78,7 +78,7 @@ If you want to try different models or masking ratios etc., first create a new c
 CUDA_VISIBLE_DEVICES=<GPU> python main.py --config <config_path> --exp_name <exp_name>
 ```
 
-## 5. Point-MaDi Classification Fine-tuning
+## 5. Classification Fine-tuning
 Fine-tuning with the default configuration, run:
 ```
 CUDA_VISIBLE_DEVICES=<GPUs> python main.py --config cfgs/full/finetune_scan_hardest.yaml \
@@ -91,37 +91,45 @@ CUDA_VISIBLE_DEVICES=<GPUs> python main.py --config cfgs/full/finetune_modelnet.
 --finetune_model --exp_name <exp_name> --ckpts <path/to/pre-trained/model> --seed $RANDOM
 ```
 
-## 6. Point-MaDi Test&Voting
+## 6. Test&Voting
 Test&Voting with the default configuration, run:
 ```
 CUDA_VISIBLE_DEVICES=<GPUs> python main.py --test --config cfgs/finetune_modelnet.yaml \
 --exp_name <output_file_name> --ckpts <path/to/best/fine-tuned/model>
 ```
-## 7. Point-MaDi Few-Shot
+## 7. Few-Shot
 Few-shot with the default configuration, run:
 ```
 CUDA_VISIBLE_DEVICES=<GPUs> python main.py --config cfgs/finetune/fewshot.yaml --finetune_model \
 --ckpts <path/to/pre-trained/model> --exp_name <exp_name> --way <5 or 10> --shot <10 or 20> --fold <0-9> --seed $RANDOM
 ```
 
-## 8. Point-MaDi Part Segmentation
+## 8. Part Segmentation
 Part segmentation on ShapeNetPart, run:
 ```
-cd segmentation
+cd part_segmentation
 python main.py --ckpts <path/to/pre-trained/model> --log_dir <path/to/log/dir> --learning_rate 0.0001 --epoch 300
 ```
 
 Test part segmentation on ShapeNetPart, run:
 ```
-cd segmentation
+cd part_segmentation
 bash test.sh <GPU> <exp_name> <path/to/best/fine-tuned/model>
 ```
 
-## 9. Point-MaDi Object Detection
+## 9. Semantic segmentation
+Semantic segmentation on S3DIS, run:
+```
+cd semantic_segmentation
+python main.py --ckpts <path/to/pre-trained/model> \
+--root path/to/data --learning_rate 0.0002 --epoch 60 --gpu <gpu_id> --log_dir <log_dir>
+```
+
+## 10. Point-MaDi Object Detection
 Please refer to the official [3DETR](https://github.com/facebookresearch/3detr) for 3D detection.
 
 
-## 10. Visualization
+## 11. Visualization
 We use [Mitsuba2PointCloudRenderer](https://github.com/tolgabirdal/Mitsuba2PointCloudRenderer) repo to render beautiful point cloud image, including specified color rendering and attention distribution rendering.
 
 
