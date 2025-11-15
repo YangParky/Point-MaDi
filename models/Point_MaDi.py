@@ -251,6 +251,8 @@ class Block(nn.Module):
             dim, num_heads=num_heads, qkv_bias=qkv_bias, qk_scale=qk_scale, attn_drop=attn_drop, proj_drop=drop)
 
     def forward(self, x, y=None):  # y is q
+
+        # Can operate as either self-attention or cross-attention.
         if y is None:
             x = x + self.drop_path(self.attn(self.norm1(x)))
             x = x + self.drop_path(self.mlp(self.norm2(x)))
@@ -465,6 +467,8 @@ class Mask_Encoder(nn.Module):
         vis_center_block = center[~bool_masked_pos_block].reshape(B, -1, 3)
         mask_center_block = center[bool_masked_pos_block].reshape(B, -1, 3)
 
+        # Partial positional diffusion (e.g., only on visible or masked tokens) is also optional;
+        # it simplifies the task and often performs as well as or even better than full diffusion.
         t = torch.randint(0, self.T2, (B,), device=neighborhood.device).long()
         vis_center_rand = self.q_sample(vis_center_rand, t)
         mask_center_rand = self.q_sample(mask_center_rand, t)
@@ -740,10 +744,10 @@ class Point_MaDi(nn.Module):
         gt_pos_vis_block = center[~mask_block].reshape(B, -1, 3)
         gt_pos_msk_block = center[mask_block].reshape(B, -1, 3)
 
-        encoder_loss_rand_vis = F.mse_loss(pos_vis_rand, gt_pos_vis_rand)
-        encoder_loss_rand_msk = F.mse_loss(pos_msk_rand, gt_pos_msk_rand)
-        encoder_loss_block_vis = F.mse_loss(pos_vis_block, gt_pos_vis_block)
-        encoder_loss_block_msk = F.mse_loss(pos_msk_block, gt_pos_msk_block)
+        center_loss_rand_vis = F.mse_loss(pos_vis_rand, gt_pos_vis_rand)
+        center_loss_rand_msk = F.mse_loss(pos_msk_rand, gt_pos_msk_rand)
+        center_loss_block_vis = F.mse_loss(pos_vis_block, gt_pos_vis_block)
+        center_loss_block_msk = F.mse_loss(pos_msk_block, gt_pos_msk_block)
 
         pos_emd_vis_rand = self.MAE_encoder.pos_embed(pos_vis_rand.detach())
         pos_emd_msk_rand = self.MAE_encoder.pos_embed(pos_msk_rand.detach())
@@ -758,7 +762,7 @@ class Point_MaDi(nn.Module):
         x_rec_rand = self.MAE_decoder(x_full_rand, pos_full_rand, t_emb, M_rand)
         x_rec_rand = self.increase_dim(x_rec_rand.transpose(1, 2)).transpose(1, 2).reshape(B * M_rand, -1, 3)
         x_gt_rand = neighborhood[mask_rand].reshape(B * M_rand, -1, 3)
-        decoder_loss_rand = self.loss_func(x_rec_rand, x_gt_rand)
+        patch_loss_rand = self.loss_func(x_rec_rand, x_gt_rand)
 
         pos_emd_vis_block = self.MAE_encoder.pos_embed(pos_vis_block.detach())
         pos_emd_msk_block = self.MAE_encoder.pos_embed(pos_msk_block.detach())
@@ -772,10 +776,10 @@ class Point_MaDi(nn.Module):
         x_rec_block = self.MAE_decoder(x_full_block, pos_full_block, t_emb, M_block)
         x_rec_block = self.increase_dim(x_rec_block.transpose(1, 2)).transpose(1, 2).reshape(B * M_block, -1, 3)
         x_gt_block = neighborhood[mask_block].reshape(B* M_block, -1, 3)
-        decoder_loss_block = self.loss_func(x_rec_block, x_gt_block)
+        patch_loss_block = self.loss_func(x_rec_block, x_gt_block)
 
-        encoder_loss = (encoder_loss_rand_vis + encoder_loss_rand_msk + encoder_loss_block_vis + encoder_loss_block_msk) * 0.25
-        decoder_loss = (decoder_loss_rand + decoder_loss_block) * 0.5
+        center_loss = (center_loss_rand_vis + center_loss_rand_msk + center_loss_block_vis + center_loss_block_msk) * 0.25
+        patch_loss = (patch_loss_rand + patch_loss_block) * 0.5
 
         if vis:
             V = G - M_rand
@@ -788,7 +792,7 @@ class Point_MaDi(nn.Module):
             pos_full = torch.cat([pos_vis_rand, pos_msk_rand], dim=1)
             return full, pos_vis_rand, pos_msk_rand, pos_full, gt_pos_vis_rand, gt_pos_msk_rand, center.reshape(B, -1, 3)
         else:
-            return encoder_loss * self.gamma, decoder_loss
+            return center_loss * self.gamma, patch_loss
 
 
 @MODELS.register_module()

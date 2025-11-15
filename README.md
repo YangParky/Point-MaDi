@@ -52,20 +52,20 @@ We use ShapeNet, ScanObjectNN, ModelNet40, ShapeNetPart, S3DIS, ScanNetV2 in thi
 ## 3. Point-MaDi Models
 | Task               | Dataset                   | Config                                                                   | Acc.       | Checkpoints Download                                                                                        |
 |--------------------|---------------------------|--------------------------------------------------------------------------|------------|-------------------------------------------------------------------------------------------------------------|
-| Pre-training       | ShapeNet                  | [pretrain.yaml](cfgs/pretrain/pretrain.yaml)                             | N.A.       | [Point-MaDi](https://drive.google.com/file/d/1L-TlZUi7umBCDpZW-1F0Gf4X-9Wvf_Zo/view?usp=share_link)         |
-| Classification     | ScanObjectNN              | [finetune_scan_objbg.yaml](./cfgs/finetune/finetune_scan_objbg.yaml)     | 95.52%     | [OBJ_BG](https://drive.google.com/file/d/1qjohpaTCl-DzHaIv6Ilq0sLAGG2H3Z9I/view?usp=share_link)             |
-| Classification     | ScanObjectNN              | [finetune_scan_objonly.yaml](./cfgs/finetune/finetune_scan_objonly.yaml) | 93.46%     | [OBJ_ONLY](https://drive.google.com/file/d/1kvowgPbvlFxx3B5WSfL3LiKZ5--5s52b/view?usp=share_link)           |
-| Classification     | ScanObjectNN              | [finetune_scan_hardest.yaml](./cfgs/finetune/finetune_scan_hardest.yaml) | 89.56%     | [PB_T50_RS](https://drive.google.com/file/d/1kjKqvs8o6jiqZc4-srMFp2DOpIYDHdgf/view?usp=share_link)          |
-| Classification     | ModelNet40(1k) w/o voting | [finetune_modelnet.yaml](./cfgs/finetune/finetune_modelnet.yaml)         | 93.6%      | [ModelNet_1K](https://drive.google.com/file/d/1UsRuIc7ND2n4PjYyF3n0tT3hf7alyOML/view?usp=share_link)        |
-| Classification     | ModelNet40(1k) w/ voting  | [finetune_modelnet.yaml](./cfgs/finetune/finetune_modelnet.yaml)         | 94.1%      | [ModelNet_1K_Voting](https://drive.google.com/file/d/1SvCfDzXM2QM7BfOd960z3759HY_c-eQv/view?usp=share_link) |
-| Part Segmentation  | ShapeNetPart              | [part segmentation](./part_segmentation)                                 | 84.8% mIoU | [Part Seg](https://drive.google.com/file/d/13XuEsN7BDu-YX86ZSM1SpUHGMvDys2VH/view?usp=share_link)           |
-| Scene Segmentation | S3DIS                     | [semantic segmentation](./semantic_segmentation)                         | 61.2% mIoU | [Semantic Seg](https://drive.google.com/file/d/13XuEsN7BDu-YX86ZSM1SpUHGMvDys2VH/view?usp=share_link)       |
+| Pre-training       | ShapeNet                  | [pretrain.yaml](cfgs/pretrain/pretrain.yaml)                             | N.A.       | [Point-MaDi](https://drive.google.com/drive/folders/1BvX5JtZIO19-xvL9_W2X8mWjTJ6FxuXU?usp=sharing)         |
+| Classification     | ScanObjectNN              | [finetune_scan_objbg.yaml](./cfgs/finetune/finetune_scan_objbg.yaml)     | 95.5%      | [OBJ_BG](https://drive.google.com/drive/folders/1k2FOXPAYva8V02AYlqA-Yu7oAQJzaMzR?usp=sharing)             |
+| Classification     | ScanObjectNN              | [finetune_scan_objonly.yaml](./cfgs/finetune/finetune_scan_objonly.yaml) | 93.4%      | [OBJ_ONLY](https://drive.google.com/drive/folders/1XjUgkd4FA7882curEMNkTFlUuvkWVSMa?usp=sharing)           |
+| Classification     | ScanObjectNN              | [finetune_scan_hardest.yaml](./cfgs/finetune/finetune_scan_hardest.yaml) | 89.6%      | [PB_T50_RS](https://drive.google.com/drive/folders/1g6k6MXhiCWzQHGcvXONcvEx4W3DJHqZY?usp=sharing)          |
+| Classification     | ModelNet40(1k) w/o voting | [finetune_modelnet.yaml](./cfgs/finetune/finetune_modelnet.yaml)         | 93.6%      | [ModelNet_1K](https://drive.google.com/drive/folders/1Ob-z90VBGeZcX26SQ1WhLjUUytQYDk1M?usp=sharing)        |
+| Classification     | ModelNet40(1k) w/ voting  | [finetune_modelnet.yaml](./cfgs/finetune/finetune_modelnet.yaml)         | 94.1%      | [ModelNet_1K_Voting](https://drive.google.com/drive/folders/1Ob-z90VBGeZcX26SQ1WhLjUUytQYDk1M?usp=sharing) |
+| Part Segmentation  | ShapeNetPart              | [part segmentation](./part_segmentation)                                 | 84.8% mIoU | [Part Seg](https://drive.google.com/drive/folders/1lFHw41rlg2Pfh31jbKuPwMskSlzE6HuO?usp=sharing)           |
+| Scene Segmentation | S3DIS                     | [semantic segmentation](./semantic_segmentation)                         | 61.2% mIoU | [Semantic Seg](https://drive.google.com/drive/folders/1cRL9WFdIVABVRtl1gCmLKhhMiiEMSlfF?usp=sharing)       |
 
-| Task              | Dataset    | Config                                       | 5w10s (%)  | 5w20s (%)  | 10w10s (%) | 10w20s (%) | Download                                                                                            |
-|-------------------|------------|----------------------------------------------|------------|------------|------------|------------|-----------------------------------------------------------------------------------------------------|
-| Few-shot learning | ModelNet40 | [fewshot.yaml](./cfgs/finetune/fewshot.yaml) | 97.2 ± 1.9 | 99.0 ± 0.9 | 93.5 ± 4.3 | 95.7 ± 2.3 | [Point-MaDi](https://drive.google.com/file/d/1L-TlZUi7umBCDpZW-1F0Gf4X-9Wvf_Zo/view?usp=share_link) |
+| Task              | Dataset    | Config                                       | 5w10s (%)  | 5w20s (%)  | 10w10s (%) | 10w20s (%) |
+|-------------------|------------|----------------------------------------------|------------|------------|------------|------------|
+| Few-shot learning | ModelNet40 | [fewshot.yaml](./cfgs/finetune/fewshot.yaml) | 97.2 ± 1.9 | 99.0 ± 0.9 | 93.5 ± 4.3 | 95.7 ± 2.3 |
 
-The checkpoints and logs have been released on [Google Drive](https://drive.google.com/drive/folders/17Eoy5N96dcTQJplCOjyeeVjSYyjW5QEd?usp=share_link). You can use the voting strategy in classification testing to reproduce the performance reported in the paper.
+The checkpoints and logs have been released on [Google Drive](https://drive.google.com/drive/folders/1PIysBbdIB4sNyv4GP5_04uEmEqEcyZEF?usp=sharing). You can use the voting strategy in classification testing to reproduce the performance reported in the paper.
 For classification downstream tasks, we randomly select 8 seeds to obtain the best checkpoint. 
 For zero-shot learning, * means that we use all the train/test data for zero-shot transfer.
 
@@ -105,7 +105,7 @@ CUDA_VISIBLE_DEVICES=<GPUs> python main.py --config cfgs/finetune/fewshot.yaml -
 --ckpts <path/to/pre-trained/model> --exp_name <exp_name> --way <5 or 10> --shot <10 or 20> --fold <0-9> --seed $RANDOM
 ```
 
-## 9. Point-MaDi Part Segmentation
+## 8. Point-MaDi Part Segmentation
 Part segmentation on ShapeNetPart, run:
 ```
 cd segmentation
@@ -118,7 +118,11 @@ cd segmentation
 bash test.sh <GPU> <exp_name> <path/to/best/fine-tuned/model>
 ```
 
-## 11. Visualization
+## 9. Point-MaDi Object Detection
+Please refer to the official [3DETR](https://github.com/facebookresearch/3detr) for 3D detection.
+
+
+## 10. Visualization
 We use [Mitsuba2PointCloudRenderer](https://github.com/tolgabirdal/Mitsuba2PointCloudRenderer) repo to render beautiful point cloud image, including specified color rendering and attention distribution rendering.
 
 
