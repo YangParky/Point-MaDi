@@ -67,7 +67,6 @@ We use ShapeNet, ScanObjectNN, ModelNet40, ShapeNetPart, S3DIS, ScanNetV2 in thi
 
 The checkpoints and logs have been released on [Google Drive](https://drive.google.com/drive/folders/1PIysBbdIB4sNyv4GP5_04uEmEqEcyZEF?usp=sharing). You can use the voting strategy in classification testing to reproduce the performance reported in the paper.
 For classification downstream tasks, we randomly select 8 seeds to obtain the best checkpoint. 
-For zero-shot learning, * means that we use all the train/test data for zero-shot transfer.
 
 ## 4. Point-MaDi Pre-training
 Pre-training with the default configuration, run the script:
