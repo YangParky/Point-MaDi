@@ -81,20 +81,20 @@ CUDA_VISIBLE_DEVICES=<GPU> python main.py --config <config_path> --exp_name <exp
 ## 5. Classification Fine-tuning
 Fine-tuning with the default configuration, run:
 ```
-CUDA_VISIBLE_DEVICES=<GPUs> python main.py --config cfgs/full/finetune_scan_hardest.yaml \
+CUDA_VISIBLE_DEVICES=<GPUs> python main.py --config cfgs/finetune/finetune_scan_hardest.yaml \
 --finetune_model --exp_name <exp_name> --ckpts <path/to/pre-trained/model> --seed $RANDOM
 ```
 
 Fine-tuning on ModelNet40, run:
 ```
-CUDA_VISIBLE_DEVICES=<GPUs> python main.py --config cfgs/full/finetune_modelnet.yaml \
+CUDA_VISIBLE_DEVICES=<GPUs> python main.py --config cfgs/finetune/finetune_modelnet.yaml \
 --finetune_model --exp_name <exp_name> --ckpts <path/to/pre-trained/model> --seed $RANDOM
 ```
 
 ## 6. Test&Voting
 Test&Voting with the default configuration, run:
 ```
-CUDA_VISIBLE_DEVICES=<GPUs> python main.py --test --config cfgs/finetune_modelnet.yaml \
+CUDA_VISIBLE_DEVICES=<GPUs> python main.py --test --config cfgs/finetune/finetune_modelnet.yaml \
 --exp_name <output_file_name> --ckpts <path/to/best/fine-tuned/model>
 ```
 ## 7. Few-Shot
