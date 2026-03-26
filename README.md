@@ -1,6 +1,6 @@
 # Point-MaDi (NeurIPS 2025 Poster)
 
-> [**Point-MaDi: Masked Autoencoding with Diffusion for Point Cloud Pre-training**](https://arxiv.org/abs/2302.02318) **NeurIPS 2025 Poster** <br>
+> [**Point-MaDi: Masked Autoencoding with Diffusion for Point Cloud Pre-training**](https://openreview.net/pdf?id=sYeE1obXGG) **NeurIPS 2025 Poster** <br>
 > [Xiaoyang Xiao](https://scholar.google.com/citations?user=ABerR7kAAAAJ), [Runzhao Yao](https://scholar.google.com/citations?user=udCF7q4AAAAJ), [Zhiqiang Tian](https://scholar.google.com/citations?user=-LfcX9IAAAAJ), and [Shaoyi Du](https://scholar.google.com/citations?user=r2bk4sQAAAAJ)
 
 [OpenReview](https://openreview.net/pdf?id=sYeE1obXGG)
